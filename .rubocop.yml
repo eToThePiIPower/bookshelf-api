@@ -1,0 +1,40 @@
+# Set global options and exludes
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+    - 'db/schema.rb'
+    - 'node_modules/**/*'
+    - 'bin/*'
+
+# Be a bit more linent on line length limits
+Metrics/LineLength:
+  Max: 100
+  IgnoredPatterns: ['\A\s*#']
+
+# Allow longer blocks/methods in database migrations
+Metrics/AbcSize:
+  Exclude:
+    - 'db/migrate/**'
+Metrics/MethodLength:
+  Exclude:
+    - 'db/migrate/**/*'
+
+# Ignore class documentation except in models
+Style/Documentation:
+  Exclude:
+    - 'app/controllers/*_controller.rb'
+    - 'app/helpers/*_helper.rb'
+    - 'app/mailers/*_mailer.rb'
+    - 'app/models/application_record.rb'
+    - 'db/migrate/**/*'
+    - 'config/application.rb'
+    - 'spec/**/*'
+    - 'test/**/*'
+
+# Use explicit symbol arrays
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+# Don't require frozen string literals
+Style/FrozenStringLiteralComment:
+    Enabled: false
