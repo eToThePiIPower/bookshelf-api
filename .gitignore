@@ -13,6 +13,9 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore RSpec example group persistence file
+/spec/examples.log
+
 # Ignore uploaded files in development.
 /storage/*
 !/storage/.keep
