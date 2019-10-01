@@ -3,6 +3,7 @@ module Api
     # BooksController:
     class BooksController < ApplicationController
       before_action :set_book, only: [:show, :update, :destroy]
+      before_action :authorize_access_request!, only: [:show, :index]
 
       # GET /books
       # GET /books.json
