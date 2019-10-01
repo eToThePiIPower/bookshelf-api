@@ -6,6 +6,11 @@ AllCops:
     - 'node_modules/**/*'
     - 'bin/*'
 
+# Let specs have longer blocks (ie example groups)
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
 # Be a bit more linent on line length limits
 Metrics/LineLength:
   Max: 100
