@@ -5,4 +5,6 @@ Rails.application.routes.draw do
       resources :books
     end
   end
+
+  post 'signup', controller: :signup, action: :create
 end
