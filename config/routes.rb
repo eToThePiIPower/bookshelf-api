@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   end
 
   post 'signup', controller: :signup, action: :create
+  post 'signin', controller: :signin, action: :create
 end
