@@ -3,8 +3,10 @@ module JWTSessionHelpers
     payload = { user_id: user.id }
     session = JWTSessions::Session.new(payload: payload)
     token = session.login
+
     if request
       request.cookies[JWTSessions.access_cookie] = token[:access]
+      request.headers[JWTSessions.csrf_header] = token[:csrf]
     elsif cookies
       cookies[JWTSessions.access_cookie] = token[:access]
     end
