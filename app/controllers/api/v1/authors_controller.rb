@@ -2,8 +2,8 @@ module Api
   module V1
     # AuthorsController: Controller for Authors
     class AuthorsController < ApplicationController
+      before_action :authorize_access_request!, only: [:create, :update, :destroy]
       before_action :set_author, only: [:show, :update, :destroy]
-      before_action :set_default_format
 
       # GET /api/v1/authors
       # GET /api/v1/authors.json
@@ -51,10 +51,6 @@ module Api
 
       def author_params
         params.fetch(:author, {}).permit(:name)
-      end
-
-      def set_default_format
-        request.format = :json
       end
     end
   end
