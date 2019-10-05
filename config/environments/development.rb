@@ -49,3 +49,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end
+
+# Configure here instead of a separate initializer because production should
+# have a more secure storage method than version control
+JWTSessions.encryption_key = 'secret'

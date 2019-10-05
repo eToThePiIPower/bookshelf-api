@@ -10,6 +10,7 @@ require 'support/factory_bot.rb'
 require 'support/factory_bot'
 require 'support/factory_bot_macros'
 require 'support/shoulda_matchers'
+require 'support/jwt_session_helpers'
 
 begin
   ActiveRecord::Migration.maintain_test_schema!
@@ -26,4 +27,6 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.filter_rails_from_backtrace!
+
+  config.include JWTSessionHelpers
 end

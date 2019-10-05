@@ -4,7 +4,7 @@ RSpec.describe '/api/v1/authors', type: :request do
   describe 'GET /api/v1/authors' do
     before do
       create_list(:author, 2)
-      get api_v1_authors_path
+      get api_v1_authors_path, as: :json
     end
 
     it 'returns all of the authors' do
@@ -19,7 +19,7 @@ RSpec.describe '/api/v1/authors', type: :request do
   describe 'GET /api/v1/author/#' do
     before do
       author = create(:author, name: 'Author McAuthorface')
-      get api_v1_author_path(author)
+      get api_v1_author_path(author), as: :json
     end
 
     it 'includes the author name' do

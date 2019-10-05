@@ -2,12 +2,13 @@ module Api
   module V1
     # BooksController:
     class BooksController < ApplicationController
+      before_action :authorize_access_request!
       before_action :set_book, only: [:show, :update, :destroy]
 
       # GET /books
       # GET /books.json
       def index
-        @books = Book.all
+        @books = current_user.books.all
       end
 
       # GET /books/1
@@ -17,7 +18,7 @@ module Api
       # POST /books
       # POST /books.json
       def create
-        @book = Book.new(book_params)
+        @book = current_user.books.new(book_params)
 
         if @book.save
           render :show, status: :created, location: api_v1_book_url(@book)
@@ -46,12 +47,14 @@ module Api
 
       # Use callbacks to share common setup or constraints between actions.
       def set_book
-        @book = Book.find(params[:id])
+        @book = current_user.books.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        render json: { error: 'Book not found' }, status: :unprocessable_entity
       end
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def book_params
-        params.require(:book).permit(:title, :year, :isbn, :author_id, :user_id)
+        params.require(:book).permit(:title, :year, :isbn, :author_id)
       end
     end
   end
