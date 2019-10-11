@@ -1,7 +1,7 @@
 module JWTSessionHelpers
   def login_as(user, request: nil, cookies: nil)
     payload = { user_id: user.id }
-    session = JWTSessions::Session.new(payload: payload)
+    session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
     token = session.login
 
     if request

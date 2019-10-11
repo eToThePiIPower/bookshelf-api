@@ -43,7 +43,7 @@ RSpec.describe SignupController, type: :controller do
 
       it 'does not returns the csrf in the json response' do
         expect(JSON.parse(response.body)).not_to have_key('csrf')
-        expect(JSON.parse(response.body)['error']).to eq "Email can't be blank"
+        expect(JSON.parse(response.body)['error']['email']).to include "can't be blank"
       end
 
       it 'does not returns a jwt_access key in the response cookie' do
