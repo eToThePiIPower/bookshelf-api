@@ -23,7 +23,7 @@ module Api
         if @author.save
           render :show, status: :created, location: api_v1_author_url(@author)
         else
-          render json: @author.errors, status: :unprocessable_entity
+          render json: { error: @author.errors }, status: :unprocessable_entity
         end
       end
 
@@ -33,7 +33,7 @@ module Api
         if @author.update(author_params)
           render :show, status: :ok, location: api_v1_author_url(@author)
         else
-          render json: @author.errors, status: :unprocessable_entity
+          render json: { error: @author.errors }, status: :unprocessable_entity
         end
       end
 
@@ -41,6 +41,10 @@ module Api
       # DELETE /api/v1/authors/1.json
       def destroy
         @author.destroy
+      rescue ActiveRecord::InvalidForeignKey
+        render json: {
+          error: 'Cannot delete Author with dependents'
+        }, status: :unprocessable_entity
       end
 
       private

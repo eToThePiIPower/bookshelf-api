@@ -23,7 +23,7 @@ module Api
         if @book.save
           render :show, status: :created, location: api_v1_book_url(@book)
         else
-          render json: @book.errors, status: :unprocessable_entity
+          render json: { error: @book.errors }, status: :unprocessable_entity
         end
       end
 
@@ -33,7 +33,7 @@ module Api
         if @book.update(book_params)
           render :show, status: :ok, location: api_v1_book_url(@book)
         else
-          render json: @book.errors, status: :unprocessable_entity
+          render json: { error: @book.errors }, status: :unprocessable_entity
         end
       end
 
