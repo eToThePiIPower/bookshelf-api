@@ -22,6 +22,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.0.beta2'
   gem 'rubocop'
   gem 'shoulda-matchers'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do
