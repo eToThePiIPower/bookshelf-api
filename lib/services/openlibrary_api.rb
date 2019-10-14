@@ -17,15 +17,25 @@ class OpenlibraryApi
 
   def extract_book(data)
     {
-      isbn10: extract_isbn(data['identifiers']['isbn_10']),
-      isbn: extract_isbn(data['identifiers']['isbn_13']),
-      authors: data['authors'].map { |a| a['name'] },
+      isbn: extract_isbn(data['identifiers']),
       title: data['title'],
+      author: find_author(data['authors'].first['name']),
       year: data['publish_date']
     }
   end
 
-  def extract_isbn(isbn_array)
-    isbn_array.is_a?(Array) ? isbn_array.first : isbn_array
+  def extract_isbn(identifiers)
+    isbn10 = identifiers['isbn_10']
+    isbn13 = identifiers['isbn_13']
+    isbn13.is_a?(Array) ? isbn13.first : isbn10.first
+  end
+
+  def find_author(name)
+    author = Author.find_by(name: name)
+    if author
+      { id: author.id, name: author.name }
+    else
+      { id: -1, name: name }
+    end
   end
 end
