@@ -5,6 +5,7 @@ Rails.application.routes.draw do
         get :books, controller: 'author_books'
       end
       resources :books
+      get 'lookup_isbn/:isbn', to: 'lookup#isbn', as: 'lookup_isbn'
     end
   end
 
