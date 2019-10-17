@@ -20,8 +20,14 @@ class OpenlibraryApi
       isbn: extract_isbn(data['identifiers']),
       title: data['title'],
       author: find_author(data['authors'].first['name']),
-      year: data['publish_date']
+      year: convert_year(data['publish_date'])
     }
+  end
+
+  def convert_year(date)
+    Date.parse(date).strftime('%Y-%m-%d')
+  rescue ArgumentError
+    Date.parse("#{date}-01-01").strftime('%Y-%m-%d')
   end
 
   def extract_isbn(identifiers)

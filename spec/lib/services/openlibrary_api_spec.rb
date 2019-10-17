@@ -12,7 +12,7 @@ RSpec.describe OpenlibraryApi do
           expect(book[:isbn]).to eq '0451526538'
           expect(book[:author]).to eq(id: -1, name: 'Mark Twain')
           expect(book[:title]).to eq 'The adventures of Tom Sawyer'
-          expect(book[:year]).to eq '1997'
+          expect(book[:year]).to eq '1997-01-01'
         end
       end
     end
@@ -26,7 +26,7 @@ RSpec.describe OpenlibraryApi do
           expect(book[:isbn]).to eq '0451526538'
           expect(book[:author]).to eq(id: author.id, name: 'Mark Twain')
           expect(book[:title]).to eq 'The adventures of Tom Sawyer'
-          expect(book[:year]).to eq '1997'
+          expect(book[:year]).to eq '1997-01-01'
         end
       end
     end
